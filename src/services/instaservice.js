@@ -1,4 +1,3 @@
-import { async } from "q";
 
 export default class InstaService {
     constructor() {
@@ -7,7 +6,7 @@ export default class InstaService {
 
     getResource = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
-
+        
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, received ${res.status}`)
         }
@@ -20,4 +19,18 @@ export default class InstaService {
         const res = await this.getResource('posts/');
         return res;
     }
+    
+    getAllPhotos = async () => {
+        const res = await this.getResource('posts/');
+        return res.map(this._transformPosts);
+    }
+
+    _transformPosts(post) {
+         return {
+             src: post.src,
+             alt: post.alt,
+             id: post.id
+         }
+    }
+
 }
