@@ -1,8 +1,8 @@
 import React from 'react';
-import img from '../error';
+import img from '../error.png';
 
 
-const ErrorMessage () => {
+const ErrorMessage = () => {
     return (
         <>
             <img src={img} alt="error"></img>        
